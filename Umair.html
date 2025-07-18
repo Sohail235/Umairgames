@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UMAIR KHAN | Interactive Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #00f0ff;
+      --secondary: #ff00f0;
+      --dark: #0f0a1a;
+      --light: #f0f0ff;
+      --neon-pink: #ff00ff;
+      --neon-blue: #00ffff;
+      --neon-purple: #9d00ff;
+      --neon-green: #00ff88;
+      --neon-yellow: #ffee00;
+      --neon-orange: #ff6600;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Rajdhani', 'Segoe UI', sans-serif;
+      background-color: var(--dark);
+      color: var(--light);
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(255, 0, 255, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(0, 255, 255, 0.05) 0%, transparent 20%);
+    }
+
+    @font-face {
+      font-family: 'Rajdhani';
+      src: url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&display=swap');
+    }
+
+    /* Glowing Animations */
+    @keyframes neon-glow {
+      0%, 100% {
+        box-shadow: 0 0 5px var(--neon-pink),
+                   0 0 10px var(--neon-blue),
+                   0 0 15px var(--neon-purple);
+      }
+      50% {
+        box-shadow: 0 0 10px var(--neon-blue),
+                   0 0 20px var(--neon-pink),
+                   0 0 30px var(--neon-purple);
+      }
+    }
+
+    @keyframes text-glow {
+      0%, 100% {
+        text-shadow: 0 0 5px var(--neon-pink),
+                    0 0 10px var(--neon-blue);
+      }
+      50% {
+        text-shadow: 0 0 10px var(--neon-blue),
+                    0 0 20px var(--neon-pink);
+      }
+    }
+
+    /* Navigation */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(15, 10, 26, 0.9);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-decoration: none;
+      animation: text-glow 3s ease-in-out infinite alternate;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--light);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-container {
+      position: relative;
+      width: 250px;
+      height: 250px;
+      margin-bottom: 2rem;
+    }
+
+    .profile-pic {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid transparent;
+      position: relative;
+      z-index: 2;
+      transition: all 0.5s ease;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+    }
+
+    .neon-border {
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, var(--neon-pink), var(--neon-blue), var(--neon-purple));
+      background-size: 400% 400%;
+      z-index: 1;
+      animation: rotate-gradient 8s linear infinite, neon-glow 3s ease-in-out infinite alternate;
+      filter: blur(5px);
+    }
+
+    @keyframes rotate-gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .profile-pic:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(0, 240, 255, 0.7);
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: text-glow 3s ease-in-out infinite alternate;
+    }
+
+    .subtitle {
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 2rem;
+      max-width: 600px;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .social-icons a {
+      color: var(--light);
+      font-size: 1.8rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: var(--primary);
+      transform: translateY(-5px);
+      text-shadow: 0 0 10px var(--neon-blue);
+    }
+
+    /* Games Section */
+    .games-section {
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: text-glow 3s ease-in-out infinite alternate;
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .game-card {
+      background: rgba(15, 10, 26, 0.7);
+      border-radius: 15px;
+      padding: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .game-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      border-color: var(--primary);
+    }
+
+    .game-card.active {
+      border-color: var(--neon-pink);
+      box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+    }
+
+    .game-title {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .game-icon {
+      font-size: 1.2rem;
+    }
+
+    .game-desc {
+      color: var(--light);
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    /* Game Containers */
+    .game-container {
+      display: none;
+      margin-top: 2rem;
+      padding: 2rem;
+      background: rgba(15, 10, 26, 0.8);
+      border-radius: 15px;
+      border: 1px solid var(--primary);
+      animation: neon-glow 3s ease-in-out infinite alternate;
+    }
+
+    .game-container.active {
+      display: block;
+    }
+
+    .game-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .game-instructions {
+      color: var(--light);
+      margin-bottom: 1.5rem;
+    }
+
+    .game-controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .game-btn {
+      padding: 0.75rem 1.5rem;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      color: var(--dark);
+      border: none;
+      border-radius: 50px;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .game-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 240, 255, 0.4);
+    }
+
+    .game-btn:disabled {
+      background: #666;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .game-score {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--primary);
+      font-size: 1.2rem;
+    }
+
+    /* Specific Game Styles */
+    /* 1. Neon Reflex Game */
+    .reflex-game-board {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .reflex-circle {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .reflex-circle::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(
+        transparent, transparent, transparent, var(--neon-pink)
+      );
+      animation: rotate 4s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .reflex-circle.active {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px var(--neon-pink);
+    }
+
+    /* 2. Memory Card Game */
+    .memory-game-board {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      max-width: 500px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .memory-card {
+      aspect-ratio: 1;
+      background: var(--dark);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transition: transform 0.5s;
+      position: relative;
+    }
+
+    .memory-card.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .memory-card .front,
+    .memory-card .back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+    }
+
+    .memory-card .front {
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      transform: rotateY(180deg);
+      font-size: 1.5rem;
+    }
+
+    .memory-card .back {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .memory-card.matched {
+      opacity: 0.5;
+      cursor: default;
+    }
+
+    /* 3. Typing Speed Test */
+    .typing-game-container {
+      text-align: center;
+    }
+
+    .typing-display {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .typing-input {
+      width: 100%;
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--primary);
+      border-radius: 8px;
+      color: var(--light);
+      font-size: 1.2rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .typing-stats {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .typing-stat {
+      text-align: center;
+    }
+
+    .typing-stat-value {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--primary);
+      font-size: 1.5rem;
+    }
+
+    /* 4. Snake Game */
+    .snake-game-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .snake-game-board {
+      width: 300px;
+      height: 300px;
+      border: 2px solid var(--primary);
+      display: grid;
+      grid-template-rows: repeat(20, 1fr);
+      grid-template-columns: repeat(20, 1fr);
+      margin-bottom: 1.5rem;
+    }
+
+    .snake-cell {
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .snake {
+      background: var(--neon-green);
+      border-radius: 2px;
+    }
+
+    .snake-head {
+      background: var(--primary);
+      border-radius: 4px;
+    }
+
+    .food {
+      background: var(--neon-pink);
+      border-radius: 50%;
+      animation: pulse 0.5s infinite alternate;
+    }
+
+    /* 5. Color Guessing Game */
+    .color-game-container {
+      text-align: center;
+    }
+
+    .color-display {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 1.5rem;
+      border-radius: 8px;
+      border: 2px solid var(--light);
+    }
+
+    .color-options {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .color-option {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .color-option:hover {
+      transform: scale(1.1);
+    }
+
+    /* 6. Reaction Time Test */
+    .reaction-game-container {
+      text-align: center;
+    }
+
+    .reaction-target {
+      width: 200px;
+      height: 200px;
+      background: var(--neon-blue);
+      border-radius: 50%;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .reaction-target.waiting {
+      background: var(--neon-orange);
+    }
+
+    .reaction-target.ready {
+      background: var(--neon-green);
+    }
+
+    .reaction-stats {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .games-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      .subtitle {
+        font-size: 1.2rem;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      .profile-container {
+        width: 200px;
+        height: 200px;
+      }
+      
+      .games-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .memory-game-board {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .reflex-game-board {
+        flex-wrap: wrap;
+      }
+      
+      .reflex-circle {
+        width: 70px;
+        height: 70px;
+      }
+      
+      .memory-game-board {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <header>
+    <nav>
+      <a href="#" class="logo">UK</a>
+      <div class="nav-links">
+        <a href="#home" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#games">Games</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="profile-container">
+      <div class="neon-border"></div>
+      <img src="https://i.postimg.cc/VkJDJ49r/Picsart-25-07-17-16-26-42-541.jpg" alt="UMAIR KHAN" class="profile-pic">
+    </div>
+    
+    <h1>UMAIR KHAN</h1>
+    <p class="subtitle">Bot Developer | Tech Enthusiast | Creative Coder</p>
+    
+    <div class="social-icons">
+      <a href="https://wa.me/923364006868" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://instagram.com/sk_the_devil1" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://youtube.com/@ukkhan" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://github.com/umairkhan" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="mailto:muhammadyosusafkhan5370@gmail.com"><i class="fas fa-envelope"></i></a>
+    </div>
+  </section>
+
+  <!-- Games Section -->
+  <section class="games-section" id="games">
+    <h2 class="section-title">Interactive Games</h2>
+    
+    <div class="games-grid">
+      <!-- Game 1: Neon Reflex Challenge -->
+      <div class="game-card" data-game="reflex">
+        <h3 class="game-title"><i class="fas fa-bolt game-icon"></i> Neon Reflex</h3>
+        <p class="game-desc">Test your reaction time by clicking the circles as they light up in sequence.</p>
+      </div>
+      
+      <!-- Game 2: Memory Card Game -->
+      <div class="game-card" data-game="memory">
+        <h3 class="game-title"><i class="fas fa-brain game-icon"></i> Memory Cards</h3>
+        <p class="game-desc">Find all matching pairs in this classic memory challenge with neon cards.</p>
+      </div>
+      
+      <!-- Game 3: Typing Speed Test -->
+      <div class="game-card" data-game="typing">
+        <h3 class="game-title"><i class="fas fa-keyboard game-icon"></i> Typing Test</h3>
+        <p class="game-desc">Measure your typing speed and accuracy with this neon-lit challenge.</p>
+      </div>
+      
+      <!-- Game 4: Snake Game -->
+      <div class="game-card" data-game="snake">
+        <h3 class="game-title"><i class="fas fa-gamepad game-icon"></i> Neon Snake</h3>
+        <p class="game-desc">The classic snake game with a futuristic neon twist.</p>
+      </div>
+      
+      <!-- Game 5: Color Guessing Game -->
+      <div class="game-card" data-game="color">
+        <h3 class="game-title"><i class="fas fa-palette game-icon"></i> Color Match</h3>
+        <p class="game-desc">Test your color perception by matching RGB colors.</p>
+      </div>
+      
+      <!-- Game 6: Reaction Time Test -->
+      <div class="game-card" data-game="reaction">
+        <h3 class="game-title"><i class="fas fa-stopwatch game-icon"></i> Reaction Test</h3>
+        <p class="game-desc">Measure how quickly you can react to color changes.</p>
+      </div>
+    </div>
+    
+    <!-- Game Containers -->
+    <!-- 1. Neon Reflex Game -->
+    <div class="game-container" id="reflex-game">
+      <div class="game-header">
+        <h3 class="game-title">Neon Reflex Challenge</h3>
+        <div class="game-score">Score: <span id="reflex-score">0</span></div>
+      </div>
+      <p class="game-instructions">Click the circles as they light up in sequence. Each successful round increases the difficulty!</p>
+      
+      <div class="reflex-game-board">
+        <div class="reflex-circle" id="circle1"></div>
+        <div class="reflex-circle" id="circle2"></div>
+        <div class="reflex-circle" id="circle3"></div>
+        <div class="reflex-circle" id="circle4"></div>
+      </div>
+      
+      <div class="game-controls">
+        <button class="game-btn" id="reflex-start">Start Game</button>
+        <button class="game-btn" id="reflex-reset" disabled>Reset</button>
+      </div>
+    </div>
+    
+    <!-- 2. Memory Card Game -->
+    <div class="game-container" id="memory-game">
+      <div class="game-header">
+        <h3 class="game-title">Memory Card Game</h3>
+        <div class="game-score">Moves: <span id="memory-moves">0</span> | Pairs: <span id="memory-pairs">0</span>/8</div>
+      </div>
+      <p class="game-instructions">Flip cards to find matching pairs. Try to complete the game with the fewest moves!</p>
+      
+      <div class="memory-game-board" id="memory-board"></div>
+      
+      <div class="game-controls">
+        <button class="game-btn" id="memory-start">Start Game</button>
+        <button class="game-btn" id="memory-reset" disabled>Reset</button>
+      </div>
+    </div>
+    
+    <!-- 3. Typing Speed Test -->
+    <div class="game-container" id="typing-game">
+      <div class="game-header">
+        <h3 class="game-title">Typing Speed Test</h3>
+        <div class="game-score">Time: <span id="typing-time">60</span>s</div>
+      </div>
+      <p class="game-instructions">Type the text below as quickly and accurately as possible. You have 60 seconds!</p>
+      
+      <div class="typing-game-container">
+        <div class="typing-display" id="typing-text"></div>
+        <input type="text" class="typing-input" id="typing-input" placeholder="Start typing here..." disabled>
+        
+        <div class="typing-stats">
+          <div class="typing-stat">
+            <div class="typing-stat-value" id="typing-wpm">0</div>
+            <div>WPM</div>
+          </div>
+          <div class="typing-stat">
+            <div class="typing-stat-value" id="typing-accuracy">0</div>
+            <div>Accuracy</div>
+          </div>
+          <div class="typing-stat">
+            <div class="typing-stat-value" id="typing-chars">0</div>
+            <div>Chars</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="game-controls">
+        <button class="game-btn" id="typing-start">Start Test</button>
+        <button class="game-btn" id="typing-reset" disabled>Reset</button>
+      </div>
+    </div>
+    
+    <!-- 4. Snake Game -->
+    <div class="game-container" id="snake-game">
+      <div class="game-header">
+        <h3 class="game-title">Neon Snake</h3>
+        <div class="game-score">Score: <span id="snake-score">0</span></div>
+      </div>
+      <p class="game-instructions">Use arrow keys to control the snake. Eat the pink food to grow longer!</p>
+      
+      <div class="snake-game-container">
+        <div class="snake-game-board" id="snake-board"></div>
+      </div>
+      
+      <div class="game-controls">
+        <button class="game-btn" id="snake-start">Start Game</button>
+        <button class="game-btn" id="snake-reset" disabled>Reset</button>
+      </div>
+    </div>
+    
+    <!-- 5. Color Guessing Game -->
+    <div class="game-container" id="color-game">
+      <div class="game-header">
+        <h3 class="game-title">Color Match Challenge</h3>
+        <div class="game-score">Score: <span id="color-score">0</span> | Streak: <span id="color-streak">0</span></div>
+      </div>
+      <p class="game-instructions">Click the color that matches the RGB value displayed above.</p>
+      
+      <div class="color-game-container">
+        <div class="color-display" id="color-target"></div>
+        <div class="color-options" id="color-options"></div>
+      </div>
+      
+      <div class="game-controls">
+        <button class="game-btn" id="color-start">Start Game</button>
+        <button class="game-btn" id="color-reset" disabled>Reset</button>
+      </div>
+    </div>
+    
+    <!-- 6. Reaction Time Test -->
+    <div class="game-container" id="reaction-game">
+      <div class="game-header">
+        <h3 class="game-title">Reaction Time Test</h3>
+        <div class="game-score">Best: <span id="reaction-best">0</span>ms</div>
+      </div>
+      <p class="game-instructions">Click when the circle turns green. Wait for the orange "Ready" signal first!</p>
+      
+      <div class="reaction-game-container">
+        <div class="reaction-target" id="reaction-target">Wait for orange...</div>
+        
+        <div class="reaction-stats">
+          <div class="typing-stat">
+            <div class="typing-stat-value" id="reaction-time">0</div>
+            <div>Current (ms)</div>
+          </div>
+          <div class="typing-stat">
+            <div class="typing-stat-value" id="reaction-avg">0</div>
+            <div>Average (ms)</div>
+          </div>
+          <div class="typing-stat">
+            <div class="typing-stat-value" id="reaction-tries">0</div>
+            <div>Tries</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="game-controls">
+        <button class="game-btn" id="reaction-start">Start Test</button>
+        <button class="game-btn" id="reaction-reset" disabled>Reset</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Game Selection Logic
+    const gameCards = document.querySelectorAll('.game-card');
+    const gameContainers = document.querySelectorAll('.game-container');
+    
+    gameCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const gameId = card.dataset.game;
+        
+        // Hide all game containers
+        gameContainers.forEach(container => {
+          container.classList.remove('active');
+        });
+        
+        // Show selected game
+        document.getElementById(`${gameId}-game`).classList.add('active');
+        
+        // Update active card styling
+        gameCards.forEach(c => {
+          c.classList.remove('active');
+        });
+        card.classList.add('active');
+        
+        // Scroll to game
+        document.getElementById(`${gameId}-game`).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+    
+    // Mobile Menu Toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+    });
+    
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          navLinks.style.display = 'none';
+        }
+      });
+    });
+    
+    // 1. Neon Reflex Game
+    const reflexCircles = document.querySelectorAll('.reflex-circle');
+    const reflexStartBtn = document.getElementById('reflex-start');
+    const reflexResetBtn = document.getElementById('reflex-reset');
+    const reflexScoreDisplay = document.getElementById('reflex-score');
+    
+    let reflexSequence = [];
+    let reflexPlayerSequence = [];
+    let reflexScore = 0;
+    let reflexGameActive = false;
+    let reflexRound = 0;
+    
+    reflexStartBtn.addEventListener('click', startReflexGame);
+    reflexResetBtn.addEventListener('click', resetReflexGame);
+    
+    reflexCircles.forEach((circle, index) => {
+      circle.addEventListener('click', () => {
+        if (reflexGameActive && reflexPlayerSequence.length < reflexSequence.length) {
+          activateReflexCircle(index);
+          reflexPlayerSequence.push(index);
+          
+          if (reflexPlayerSequence[reflexPlayerSequence.length - 1] !== 
+              reflexSequence[reflexPlayerSequence.length - 1]) {
+            endReflexGame();
+          } else if (reflexPlayerSequence.length === reflexSequence.length) {
+            reflexScore++;
+            reflexScoreDisplay.textContent = reflexScore;
+            reflexPlayerSequence = [];
+            setTimeout(playReflexRound, 1000);
+          }
+        }
+      });
+    });
+    
+    function startReflexGame() {
+      reflexGameActive = true;
+      reflexStartBtn.disabled = true;
+      reflexResetBtn.disabled = false;
+      reflexScore = 0;
+      reflexRound = 0;
+      reflexScoreDisplay.textContent = reflexScore;
+      reflexSequence = [];
+      reflexPlayerSequence = [];
+      playReflexRound();
+    }
+    
+    function playReflexRound() {
+      reflexRound++;
+      reflexSequence.push(Math.floor(Math.random() * reflexCircles.length));
+      
+      let i = 0;
+      const interval = setInterval(() => {
+        activateReflexCircle(reflexSequence[i]);
+        i++;
+        
+        if (i >= reflexSequence.length) {
+          clearInterval(interval);
+        }
+      }, 800);
+    }
+    
+    function activateReflexCircle(index) {
+      const circle = reflexCircles[index];
+      circle.classList.add('active');
+      circle.style.backgroundColor = getRandomNeonColor();
+      
+      setTimeout(() => {
+        circle.classList.remove('active');
+        circle.style.backgroundColor = 'rgba(0, 0, 0, 0.3)';
+      }, 500);
+    }
+    
+    function endReflexGame() {
+      alert(`Game Over! Your score: ${reflexScore}`);
+      resetReflexGame();
+    }
+    
+    function resetReflexGame() {
+      reflexGameActive = false;
+      reflexSequence = [];
+      reflexPlayerSequence = [];
+      reflexScore = 0;
+      reflexRound = 0;
+      reflexScoreDisplay.textContent = reflexScore;
+      reflexStartBtn.disabled = false;
+      reflexResetBtn.disabled = true;
+      
+      reflexCircles.forEach(circle => {
+        circle.classList.remove('active');
+        circle.style.backgroundColor = 'rgba(0, 0, 0, 0.3)';
+      });
+    }
+    
+    // 2. Memory Card Game
+    const memoryBoard = document.getElementById('memory-board');
+    const memoryStartBtn = document.getElementById('memory-start');
+    const memoryResetBtn = document.getElementById('memory-reset');
+    const memoryMovesDisplay = document.getElementById('memory-moves');
+    const memoryPairsDisplay = document.getElementById('memory-pairs');
+    
+    let memoryCards = [];
+    let memoryFlippedCards = [];
+    let memoryMatchedPairs = 0;
+    let memoryMoves = 0;
+    let memoryGameActive = false;
+    
+    memoryStartBtn.addEventListener('click', startMemoryGame);
+    memoryResetBtn.addEventListener('click', resetMemoryGame);
+    
+    const memorySymbols = ['🚀', '👾', '🎮', '👻', '🤖', '🛸', '🔮', '🎯'];
+    
+    function createMemoryBoard() {
+      memoryBoard.innerHTML = '';
+      const cards = [...memorySymbols, ...memorySymbols];
+      cards.sort(() => Math.random() - 0.5);
+      
+      cards.forEach((symbol, index) => {
+        const card = document.createElement('div');
+        card.className = 'memory-card';
+        card.dataset.index = index;
+        
+        const front = document.createElement('div');
+        front.className = 'front';
+        front.textContent = symbol;
+        
+        const back = document.createElement('div');
+        back.className = 'back';
+        
+        card.appendChild(front);
+        card.appendChild(back);
+        card.addEventListener('click', flipMemoryCard);
+        
+        memoryBoard.appendChild(card);
+      });
+      
+      memoryCards = document.querySelectorAll('.memory-card');
+    }
+    
+    function flipMemoryCard() {
+      if (!memoryGameActive || this === memoryFlippedCards[0] || 
+          this.classList.contains('matched') || memoryFlippedCards.length >= 2) {
+        return;
+      }
+      
+      this.classList.add('flipped');
+      memoryFlippedCards.push(this);
+      
+      if (memoryFlippedCards.length === 2) {
+        memoryMoves++;
+        memoryMovesDisplay.textContent = memoryMoves;
+        checkForMatch();
+      }
+    }
+    
+    function checkForMatch() {
+      const [card1, card2] = memoryFlippedCards;
+      const symbol1 = card1.querySelector('.front').textContent;
+      const symbol2 = card2.querySelector('.front').textContent;
+      
+      if (symbol1 === symbol2) {
+        card1.classList.add('matched');
+        card2.classList.add('matched');
+        memoryMatchedPairs++;
+        memoryPairsDisplay.textContent = memoryMatchedPairs;
+        
+        if (memoryMatchedPairs === memorySymbols.length) {
+          setTimeout(() => {
+            alert(`Congratulations! You won in ${memoryMoves} moves!`);
+          }, 500);
+        }
+      } else {
+        setTimeout(() => {
+          card1.classList.remove('flipped');
+          card2.classList.remove('flipped');
+        }, 1000);
+      }
+      
+      memoryFlippedCards = [];
+    }
+    
+    function startMemoryGame() {
+      memoryGameActive = true;
+      memoryStartBtn.disabled = true;
+      memoryResetBtn.disabled = false;
+      memoryMoves = 0;
+      memoryMatchedPairs = 0;
+      memoryMovesDisplay.textContent = memoryMoves;
+      memoryPairsDisplay.textContent = memoryMatchedPairs;
+      createMemoryBoard();
+    }
+    
+    function resetMemoryGame() {
+      memoryGameActive = false;
+      memoryStartBtn.disabled = false;
+      memoryResetBtn.disabled = true;
+      memoryMoves = 0;
+      memoryMatchedPairs = 0;
+      memoryMovesDisplay.textContent = memoryMoves;
+      memoryPairsDisplay.textContent = memoryMatchedPairs;
+      memoryBoard.innerHTML = '';
+    }
+    
+    // 3. Typing Speed Test
+    const typingTextDisplay = document.getElementById('typing-text');
+    const typingInput = document.getElementById('typing-input');
+    const typingStartBtn = document.getElementById('typing-start');
+    const typingResetBtn = document.getElementById('typing-reset');
+    const typingTimeDisplay = document.getElementById('typing-time');
+    const typingWpmDisplay = document.getElementById('typing-wpm');
+    const typingAccuracyDisplay = document.getElementById('typing-accuracy');
+    const typingCharsDisplay = document.getElementById('typing-chars');
+    
+    let typingTimer;
+    let typingTimeLeft = 60;
+    let typingTotalChars = 0;
+    let typingCorrectChars = 0;
+    let typingTestActive = false;
+    
+    const typingSentences = [
+      "The quick brown fox jumps over the lazy dog.",
+      "Programming is the art of telling another human what one wants the computer to do.",
+      "JavaScript is the world's most popular programming language.",
+      "The best way to predict the future is to invent it.",
+      "Debugging is twice as hard as writing the code in the first place."
+    ];
+    
+    typingStartBtn.addEventListener('click', startTypingTest);
+    typingResetBtn.addEventListener('click', resetTypingTest);
+    typingInput.addEventListener('input', checkTypingInput);
+    
+    function startTypingTest() {
+      typingTestActive = true;
+      typingStartBtn.disabled = true;
+      typingResetBtn.disabled = false;
+      typingTimeLeft = 60;
+      typingTotalChars = 0;
+      typingCorrectChars = 0;
+      
+      typingTextDisplay.textContent = typingSentences[Math.floor(Math.random() * typingSentences.length)];
+      typingInput.value = '';
+      typingInput.disabled = false;
+      typingInput.focus();
+      
+      updateTypingStats();
+      typingTimer = setInterval(updateTypingTimer, 1000);
+    }
+    
+    function updateTypingTimer() {
+      typingTimeLeft--;
+      typingTimeDisplay.textContent = typingTimeLeft;
+      
+      if (typingTimeLeft <= 0) {
+        endTypingTest();
+      }
+    }
+    
+    function checkTypingInput() {
+      const text = typingTextDisplay.textContent;
+      const input = typingInput.value;
+      typingTotalChars = input.length;
+      
+      let correct = 0;
+      for (let i = 0; i < input.length; i++) {
+        if (input[i] === text[i]) {
+          correct++;
+        }
+      }
+      typingCorrectChars = correct;
+      
+      updateTypingStats();
+      
+      if (input === text) {
+        typingTextDisplay.textContent = typingSentences[Math.floor(Math.random() * typingSentences.length)];
+        typingInput.value = '';
+      }
+    }
+    
+    function updateTypingStats() {
+      const minutes = (60 - typingTimeLeft) / 60;
+      const wpm = Math.round((typingCorrectChars / 5) / Math.max(minutes, 0.1));
+      const accuracy = typingTotalChars > 0 ? Math.round((typingCorrectChars / typingTotalChars) * 100) : 0;
+      
+      typingWpmDisplay.textContent = wpm;
+      typingAccuracyDisplay.textContent = `${accuracy}%`;
+      typingCharsDisplay.textContent = typingTotalChars;
+    }
+    
+    function endTypingTest() {
+      clearInterval(typingTimer);
+      typingTestActive = false;
+      typingInput.disabled = true;
+      alert(`Test complete! Your speed: ${typingWpmDisplay.textContent} WPM with ${typingAccuracyDisplay.textContent} accuracy`);
+    }
+    
+    function resetTypingTest() {
+      clearInterval(typingTimer);
+      typingTestActive = false;
+      typingStartBtn.disabled = false;
+      typingResetBtn.disabled = true;
+      typingTimeLeft = 60;
+      typingTimeDisplay.textContent = typingTimeLeft;
+      typingTextDisplay.textContent = 'Press Start to begin the typing test';
+      typingInput.value = '';
+      typingInput.disabled = true;
+      typingWpmDisplay.textContent = '0';
+      typingAccuracyDisplay.textContent = '0';
+      typingCharsDisplay.textContent = '0';
+    }
+    
+    // 4. Snake Game
+    const snakeBoard = document.getElementById('snake-board');
+    const snakeStartBtn = document.getElementById('snake-start');
+    const snakeResetBtn = document.getElementById('snake-reset');
+    const snakeScoreDisplay = document.getElementById('snake-score');
+    
+    let snakeGameInterval;
+    let snake = [];
+    let snakeDirection = 'right';
+    let food = {};
+    let snakeScore = 0;
+    let snakeGameActive = false;
+    
+    snakeStartBtn.addEventListener('click', startSnakeGame);
+    snakeResetBtn.addEventListener('click', resetSnakeGame);
+    document.addEventListener('keydown', changeSnakeDirection);
+    
+    function createSnakeBoard() {
+      snakeBoard.innerHTML = '';
+      
+      // Create snake cells
+      for (let i = 0; i < 20; i++) {
+        for (let j = 0; j < 20; j++) {
+          const cell = document.createElement('div');
+          cell.className = 'snake-cell';
+          cell.dataset.row = i;
+          cell.dataset.col = j;
+          snakeBoard.appendChild(cell);
+        }
+      }
+    }
+    
+    function startSnakeGame() {
+      snakeGameActive = true;
+      snakeStartBtn.disabled = true;
+      snakeResetBtn.disabled = false;
+      snakeScore = 0;
+      snakeScoreDisplay.textContent = snakeScore;
+      
+      // Initialize snake
+      snake = [
+        {row: 10, col: 5},
+        {row: 10, col: 4},
+        {row: 10, col: 3}
+      ];
+      
+      snakeDirection = 'right';
+      createFood();
+      drawSnake();
+      
+      snakeGameInterval = setInterval(moveSnake, 150);
+    }
+    
+    function moveSnake() {
+      const head = {...snake[0]};
+      
+      // Move head based on direction
+      switch(snakeDirection) {
+        case 'up': head.row--; break;
+        case 'down': head.row++; break;
+        case 'left': head.col--; break;
+        case 'right': head.col++; break;
+      }
+      
+      // Check for collisions
+      if (head.row < 0 || head.row >= 20 || head.col < 0 || head.col >= 20 ||
+          snake.some(segment => segment.row === head.row && segment.col === head.col)) {
+        endSnakeGame();
+        return;
+      }
+      
+      // Add new head
+      snake.unshift(head);
+      
+      // Check if snake ate food
+      if (head.row === food.row && head.col === food.col) {
+        snakeScore++;
+        snakeScoreDisplay.textContent = snakeScore;
+        createFood();
+      } else {
+        // Remove tail if no food eaten
+        snake.pop();
+      }
+      
+      drawSnake();
+    }
+    
+    function drawSnake() {
+      // Clear board
+      document.querySelectorAll('.snake-cell').forEach(cell => {
+        cell.innerHTML = '';
+        cell.classList.remove('snake', 'snake-head', 'food');
+      });
+      
+      // Draw snake
+      snake.forEach((segment, index) => {
+        const cell = document.querySelector(`.snake-cell[data-row="${segment.row}"][data-col="${segment.col}"]`);
+        if (index === 0) {
+          cell.classList.add('snake-head');
+        } else {
+          cell.classList.add('snake');
+        }
+      });
+      
+      // Draw food
+      const foodCell = document.querySelector(`.snake-cell[data-row="${food.row}"][data-col="${food.col}"]`);
+      if (foodCell) foodCell.classList.add('food');
+    }
+    
+    function createFood() {
+      let newFood;
+      do {
+        newFood = {
+          row: Math.floor(Math.random() * 20),
+          col: Math.floor(Math.random() * 20)
+        };
+      } while (snake.some(segment => segment.row === newFood.row && segment.col === newFood.col));
+      
+      food = newFood;
+    }
+    
+    function changeSnakeDirection(e) {
+      if (!snakeGameActive) return;
+      
+      const key = e.key;
+      const goingUp = snakeDirection === 'up';
+      const goingDown = snakeDirection === 'down';
+      const goingLeft = snakeDirection === 'left';
+      const goingRight = snakeDirection === 'right';
+      
+      if (key === 'ArrowUp' && !goingDown) snakeDirection = 'up';
+      if (key === 'ArrowDown' && !goingUp) snakeDirection = 'down';
+      if (key === 'ArrowLeft' && !goingRight) snakeDirection = 'left';
+      if (key === 'ArrowRight' && !goingLeft) snakeDirection = 'right';
+    }
+    
+    function endSnakeGame() {
+      clearInterval(snakeGameInterval);
+      snakeGameActive = false;
+      alert(`Game Over! Your score: ${snakeScore}`);
+    }
+    
+    function resetSnakeGame() {
+      clearInterval(snakeGameInterval);
+      snakeGameActive = false;
+      snakeStartBtn.disabled = false;
+      snakeResetBtn.disabled = true;
+      snakeScore = 0;
+      snakeScoreDisplay.textContent = snakeScore;
+      createSnakeBoard();
+    }
+    
+    // 5. Color Guessing Game
+    const colorTarget = document.getElementById('color-target');
+    const colorOptions = document.getElementById('color-options');
+    const colorStartBtn = document.getElementById('color-start');
+    const colorResetBtn = document.getElementById('color-reset');
+    const colorScoreDisplay = document.getElementById('color-score');
+    const colorStreakDisplay = document.getElementById('color-streak');
+    
+    let colorGameActive = false;
+    let colorScore = 0;
+    let colorStreak = 0;
+    let correctColor = '';
+    
+    colorStartBtn.addEventListener('click', startColorGame);
+    colorResetBtn.addEventListener('click', resetColorGame);
+    
+    function startColorGame() {
+      colorGameActive = true;
+      colorStartBtn.disabled = true;
+      colorResetBtn.disabled = false;
+      colorScore = 0;
+      colorStreak = 0;
+      colorScoreDisplay.textContent = colorScore;
+      colorStreakDisplay.textContent = colorStreak;
+      
+      generateColorRound();
+    }
+    
+    function generateColorRound() {
+      // Generate random RGB color
+      const r = Math.floor(Math.random() * 256);
+      const g = Math.floor(Math.random() * 256);
+      const b = Math.floor(Math.random() * 256);
+      correctColor = `rgb(${r}, ${g}, ${b})`;
+      
+      // Set target display
+      colorTarget.style.backgroundColor = correctColor;
+      colorTarget.textContent = correctColor;
+      
+      // Generate options (one correct, others similar)
+      colorOptions.innerHTML = '';
+      const correctIndex = Math.floor(Math.random() * 3);
+      
+      for (let i = 0; i < 3; i++) {
+        const option = document.createElement('div');
+        option.className = 'color-option';
+        
+        if (i === correctIndex) {
+          option.style.backgroundColor = correctColor;
+        } else {
+          // Generate similar but different color
+          const similarR = Math.max(0, Math.min(255, r + Math.floor(Math.random() * 60 - 30)));
+          const similarG = Math.max(0, Math.min(255, g + Math.floor(Math.random() * 60 - 30)));
+          const similarB = Math.max(0, Math.min(255, b + Math.floor(Math.random() * 60 - 30)));
+          option.style.backgroundColor = `rgb(${similarR}, ${similarG}, ${similarB})`;
+        }
+        
+        option.addEventListener('click', () => checkColorChoice(option.style.backgroundColor));
+        colorOptions.appendChild(option);
+      }
+    }
+    
+    function checkColorChoice(choice) {
+      if (!colorGameActive) return;
+      
+      if (choice === correctColor) {
+        colorScore++;
+        colorStreak++;
+        colorScoreDisplay.textContent = colorScore;
+        colorStreakDisplay.textContent = colorStreak;
+        
+        // Flash green for correct
+        colorTarget.style.boxShadow = '0 0 20px var(--neon-green)';
+        setTimeout(() => {
+          colorTarget.style.boxShadow = 'none';
+          generateColorRound();
+        }, 500);
+      } else {
+        colorStreak = 0;
+        colorStreakDisplay.textContent = colorStreak;
+        
+        // Flash red for incorrect
+        colorTarget.style.boxShadow = '0 0 20px var(--neon-pink)';
+        setTimeout(() => {
+          colorTarget.style.boxShadow = 'none';
+        }, 500);
+      }
+    }
+    
+    function resetColorGame() {
+      colorGameActive = false;
+      colorStartBtn.disabled = false;
+      colorResetBtn.disabled = true;
+      colorScore = 0;
+      colorStreak = 0;
+      colorScoreDisplay.textContent = colorScore;
+      colorStreakDisplay.textContent = colorStreak;
+      colorTarget.style.backgroundColor = '';
+      colorTarget.textContent = 'Press Start to begin';
+      colorOptions.innerHTML = '';
+    }
+    
+    // 6. Reaction Time Test
+    const reactionTarget = document.getElementById('reaction-target');
+    const reactionStartBtn = document.getElementById('reaction-start');
+    const reactionResetBtn = document.getElementById('reaction-reset');
+    const reactionTimeDisplay = document.getElementById('reaction-time');
+    const reactionAvgDisplay = document.getElementById('reaction-avg');
+    const reactionBestDisplay = document.getElementById('reaction-best');
+    const reactionTriesDisplay = document.getElementById('reaction-tries');
+    
+    let reactionTestActive = false;
+    let reactionStartTime = 0;
+    let reactionTimes = [];
+    let reactionTimeout;
+    
+    reactionStartBtn.addEventListener('click', startReactionTest);
+    reactionResetBtn.addEventListener('click', resetReactionTest);
+    reactionTarget.addEventListener('click', reactionClickHandler);
+    
+    function startReactionTest() {
+      reactionTestActive = true;
+      reactionStartBtn.disabled = true;
+      reactionResetBtn.disabled = false;
+      reactionTimes = [];
+      updateReactionStats();
+      
+      reactionTarget.textContent = 'Wait for orange...';
+      reactionTarget.className = 'reaction-target waiting';
+      
+      // Random delay before turning green (1-5 seconds)
+      const delay = 1000 + Math.random() * 4000;
+      
+      reactionTimeout = setTimeout(() => {
+        if (reactionTestActive) {
+          reactionTarget.textContent = 'CLICK NOW!';
+          reactionTarget.className = 'reaction-target ready';
+          reactionStartTime = Date.now();
+        }
+      }, delay);
+    }
+    
+    function reactionClickHandler() {
+      if (!reactionTestActive) return;
+      
+      if (this.classList.contains('ready')) {
+        const reactionTime = Date.now() - reactionStartTime;
+        reactionTimes.push(reactionTime);
+        
+        this.textContent = `${reactionTime}ms - Click to try again`;
+        this.className = 'reaction-target';
+        
+        updateReactionStats();
+        
+        // Prepare for next try after short delay
+        setTimeout(() => {
+          if (reactionTestActive) {
+            this.textContent = 'Wait for orange...';
+            this.className = 'reaction-target waiting';
+            
+            const delay = 1000 + Math.random() * 4000;
+            reactionTimeout = setTimeout(() => {
+              if (reactionTestActive) {
+                this.textContent = 'CLICK NOW!';
+                this.className = 'reaction-target ready';
+                reactionStartTime = Date.now();
+              }
+            }, delay);
+          }
+        }, 1000);
+      } else if (this.classList.contains('waiting')) {
+        // Clicked too soon
+        this.textContent = 'Too soon! Try again';
+        this.className = 'reaction-target';
+        clearTimeout(reactionTimeout);
+        
+        setTimeout(() => {
+          if (reactionTestActive) {
+            this.textContent = 'Wait for orange...';
+            this.className = 'reaction-target waiting';
+            
+            const delay = 1000 + Math.random() * 4000;
+            reactionTimeout = setTimeout(() => {
+              if (reactionTestActive) {
+                this.textContent = 'CLICK NOW!';
+                this.className = 'reaction-target ready';
+                reactionStartTime = Date.now();
+              }
+            }, delay);
+          }
+        }, 1000);
+      }
+    }
+    
+    function updateReactionStats() {
+      if (reactionTimes.length === 0) return;
+      
+      const current = reactionTimes[reactionTimes.length - 1];
+      const average = Math.round(reactionTimes.reduce((a, b) => a + b, 0) / reactionTimes.length);
+      const best = Math.min(...reactionTimes);
+      
+      reactionTimeDisplay.textContent = current;
+      reactionAvgDisplay.textContent = average;
+      reactionBestDisplay.textContent = best;
+      reactionTriesDisplay.textContent = reactionTimes.length;
+    }
+    
+    function resetReactionTest() {
+      reactionTestActive = false;
+      reactionStartBtn.disabled = false;
+      reactionResetBtn.disabled = true;
+      clearTimeout(reactionTimeout);
+      reactionTimes = [];
+      reactionTarget.textContent = 'Press Start to begin';
+      reactionTarget.className = 'reaction-target';
+      reactionTimeDisplay.textContent = '0';
+      reactionAvgDisplay.textContent = '0';
+      reactionBestDisplay.textContent = '0';
+      reactionTriesDisplay.textContent = '0';
+    }
+    
+    // Helper Functions
+    function getRandomNeonColor() {
+      const colors = ['#ff00ff', '#00ffff', '#9d00ff', '#00ff88', '#ffee00'];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+    
+    // Initialize games
+    createSnakeBoard();
+    resetMemoryGame();
+    resetTypingTest();
+    resetColorGame();
+    resetReactionTest();
+  </script>
+</body>
+</html>
